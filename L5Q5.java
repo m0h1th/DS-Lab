@@ -24,7 +24,7 @@ public class L5Q5
 
 class Stack
 {
-	int stack[];
+	private int stack[];
 	private int top;
 
 	Stack()
