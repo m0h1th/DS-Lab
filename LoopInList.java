@@ -1,17 +1,29 @@
 import java.util.Scanner;
 
-public class L8Q1
+public class LoopInList 
 {
-	public static void main(String args[])
-	{
-		LinkedList mylist = new LinkedList();
-		mylist.inserttotail(1);
-		mylist.inserttotail(2);
-		mylist.inserttotail(3);
-		mylist.display();
-
-	}
+    public static void main(String args[])
+    {
+        //Creating a loop in the list
+        LinkedList mylist = new LinkedList();
+        mylist.inserttotail(1);
+        mylist.inserttotail(2);
+        mylist.inserttotail(3);
+        mylist.inserttotail(4);
+        Node head = mylist.getHead().getNext();
+        Node tail = mylist.getTail();
+        tail.setNext(head);
+        System.out.println(mylist.checkLoop());
+        //Creating a list with no loop
+        LinkedList mylist2 = new LinkedList();
+        mylist2.inserttotail(1);
+        mylist2.inserttotail(2);
+        mylist2.inserttotail(3);
+        System.out.println(mylist2.checkLoop());
+    }
 }
+
+
 
 class Node
 {
@@ -59,6 +71,37 @@ class LinkedList
 	{
 		head = null;
 	}
+    LinkedList(Node head)
+    {
+        this.head = head;
+    }
+
+    public boolean checkLoop()
+    {
+        Node slow = head;
+        Node fast = head;
+        while (slow!=null && fast!=null && fast.getNext()!=null)
+        {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if (slow==fast)
+                return true;
+        }
+        return false;
+    }
+
+    public Node getHead()
+    {
+        return head;
+    }
+    
+    public Node getTail()
+    {
+        Node curr = head;
+        while (curr.getNext()!=null)
+            curr = curr.getNext();
+        return curr;
+    }
 
 	public void inserttohead(int item)
 	{
@@ -148,12 +191,12 @@ class LinkedList
 		curr.setNext(temp);
 	}
 
-	public void delete_key(int key)
+	public int delete_key(int key)
 	{
 		if (head==null)
 		{
 			System.out.println("Empty");
-			return;
+			return -1;
 		}
 		Node curr = head;
 		Node prev = null;
@@ -164,7 +207,9 @@ class LinkedList
 			prev = curr;
 			curr = curr.getNext();
 		}
+		int tmp = curr.getData();
 		prev.setNext(curr.getNext());
+		return tmp;
 	}
 
 	public void display()
