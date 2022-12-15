@@ -20,6 +20,17 @@ public class LoopInList
         mylist2.inserttotail(2);
         mylist2.inserttotail(3);
         System.out.println(mylist2.checkLoop());
+        //Testing with a list with one node
+        LinkedList mylist3 = new LinkedList();
+        mylist3.inserttotail(1);
+        Node n = mylist3.getHead();
+        n.setNext(n);
+        System.out.println(mylist3.checkLoop());
+        //Testing with two nodes
+        LinkedList mylist4 = new LinkedList();
+        mylist4.inserttotail(1);
+        mylist4.inserttotail(2);
+        System.out.println(mylist4.checkLoop());
     }
 }
 
